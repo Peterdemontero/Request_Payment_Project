@@ -1,0 +1,36 @@
+version: '3.0'
+services:
+
+  web:
+    image: nginx
+    ports:
+      - "8002:80"
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./src:/var/www/html
+    restart: always
+
+  app:
+    build:
+      dockerfile: ./php/Dockerfile
+    env_file:
+      - ./php/.env
+    volumes:
+      - ./src:/var/www/html
+    restart: always
+
+  db:
+    image: mysql:8.0
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "4422:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 61997
+      MYSQL_USER: peterdemontero
+      MYSQL_PASSWORD: 61997
+      MYSQL_DATABASE: Rpayment_db
+
+volumes:
+  mysql_data:

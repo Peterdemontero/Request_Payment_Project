@@ -1,0 +1,8 @@
+{
+    "require": {
+     
+        "adodb/adodb-php": "^5.22", 
+        "slim/slim": "4.*"
+    }
+}
+ 
